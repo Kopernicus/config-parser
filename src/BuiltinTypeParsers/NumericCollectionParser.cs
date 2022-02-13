@@ -45,12 +45,12 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         /// The value that is being parsed
         /// </summary>
         public List<T> Value { get; set; }
-        
+
         /// <summary>
         /// The method that is used to parse the string
         /// </summary>
         private readonly MethodInfo _parserMethod;
-        
+
         /// <summary>
         /// Parse the Value from a string
         /// </summary>
@@ -62,7 +62,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
             // Get the tokens of this String
             foreach (String e in s.Split(new[] { ' ', ',', ';', '\t' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                Value.Add((T) _parserMethod.Invoke(null, new Object[] {e}));
+                Value.Add((T)_parserMethod.Invoke(null, new Object[] { e }));
             }
         }
 
@@ -73,17 +73,17 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return Value == null ? null : String.Join(" ", Value.Select(v => v.ToString()).ToArray());
         }
-        
+
         /// <summary>
         /// Create a new NumericCollectionParser
         /// </summary>
         public NumericCollectionParser()
         {
             // Get the parse method for this object
-            _parserMethod = typeof(T).GetMethod("Parse", new [] { typeof(String) });
+            _parserMethod = typeof(T).GetMethod("Parse", new[] { typeof(String) });
             Value = new List<T>();
         }
-        
+
         /// <summary>
         /// Create a new NumericCollectionParser from already existing values
         /// </summary>
@@ -99,7 +99,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return parser.Value;
         }
-        
+
         /// <summary>
         /// Convert Value to Parser
         /// </summary>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Kopernicus ConfigNode Parser
  * -------------------------------------------------------------
  * This library is free software; you can redistribute it and/or
@@ -119,7 +119,7 @@ namespace Kopernicus.ConfigParser
 
             // Discover members tagged with parser attributes
             foreach (MemberInfo member in o.GetType()
-                .GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+                .GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
             {
                 // Is this member a parser target?
                 ParserTarget[] attributes = (ParserTarget[]) member.GetCustomAttributes(typeof(ParserTarget), true);
@@ -205,17 +205,17 @@ namespace Kopernicus.ConfigParser
                 Object targetValue = null;
                 if (member.MemberType == MemberTypes.Field)
                 {
-                    targetType = ((FieldInfo) member).FieldType;
-                    targetValue = getChildren ? ((FieldInfo) member).GetValue(o) : null;
+                    targetType = ((FieldInfo)member).FieldType;
+                    targetValue = getChildren ? ((FieldInfo)member).GetValue(o) : null;
                 }
                 else
                 {
-                    targetType = ((PropertyInfo) member).PropertyType;
+                    targetType = ((PropertyInfo)member).PropertyType;
                     try
                     {
-                        if (((PropertyInfo) member).CanRead && getChildren)
+                        if (((PropertyInfo)member).CanRead && getChildren)
                         {
-                            targetValue = ((PropertyInfo) member).GetValue(o, null);
+                            targetValue = ((PropertyInfo)member).GetValue(o, null);
                         }
                     }
                     catch (Exception)
@@ -287,7 +287,7 @@ namespace Kopernicus.ConfigParser
                         }
 
                         attributes =
-                            (RequireConfigType[]) genericTypeB.GetCustomAttributes(typeof(RequireConfigType), true);
+                            (RequireConfigType[])genericTypeB.GetCustomAttributes(typeof(RequireConfigType), true);
                         if (attributes.Length > 0 || genericTypeB == typeof(String))
                         {
                             ConfigType type = genericTypeB == typeof(String) ? ConfigType.Value : attributes[0].Type;
@@ -386,7 +386,7 @@ namespace Kopernicus.ConfigParser
                                     {
                                         case NameSignificance.None:
                                         case NameSignificance.Key when subnode.name == target.Key:
-                                            
+
                                             // Check if the type represents patchable data
                                             Object current = null;
                                             if (typeof(IPatchable).IsAssignableFrom(genericType) &&
@@ -604,13 +604,13 @@ namespace Kopernicus.ConfigParser
                 // If the member type is a field, set the value
                 if (member.MemberType == MemberTypes.Field)
                 {
-                    ((FieldInfo) member).SetValue(o, targetValue);
+                    ((FieldInfo)member).SetValue(o, targetValue);
                 }
 
                 // If the member wasn't a field, it must be a property.  If the property is writable, set it.
-                else if (((PropertyInfo) member).CanWrite)
+                else if (((PropertyInfo)member).CanWrite)
                 {
-                    ((PropertyInfo) member).SetValue(o, targetValue, null);
+                    ((PropertyInfo)member).SetValue(o, targetValue, null);
                 }
             }
         }
@@ -642,17 +642,17 @@ namespace Kopernicus.ConfigParser
                 Object targetValue = null;
                 if (member.MemberType == MemberTypes.Field)
                 {
-                    targetType = ((FieldInfo) member).FieldType;
-                    targetValue = getChildren ? ((FieldInfo) member).GetValue(o) : null;
+                    targetType = ((FieldInfo)member).FieldType;
+                    targetValue = getChildren ? ((FieldInfo)member).GetValue(o) : null;
                 }
                 else
                 {
-                    targetType = ((PropertyInfo) member).PropertyType;
+                    targetType = ((PropertyInfo)member).PropertyType;
                     try
                     {
-                        if (((PropertyInfo) member).CanRead && getChildren)
+                        if (((PropertyInfo)member).CanRead && getChildren)
                         {
-                            targetValue = ((PropertyInfo) member).GetValue(o, null);
+                            targetValue = ((PropertyInfo)member).GetValue(o, null);
                         }
                     }
                     catch (Exception)
@@ -729,7 +729,7 @@ namespace Kopernicus.ConfigParser
                         if (!targetType.IsAbstract)
                         {
                             targetValue = Activator.CreateInstance(targetType);
-                            
+
                         }
                     }
 
@@ -774,13 +774,13 @@ namespace Kopernicus.ConfigParser
                 // If the member type is a field, set the value
                 if (member.MemberType == MemberTypes.Field)
                 {
-                    ((FieldInfo) member).SetValue(o, targetValue);
+                    ((FieldInfo)member).SetValue(o, targetValue);
                 }
 
                 // If the member wasn't a field, it must be a property.  If the property is writable, set it.
-                else if (((PropertyInfo) member).CanWrite)
+                else if (((PropertyInfo)member).CanWrite)
                 {
-                    ((PropertyInfo) member).SetValue(o, targetValue, null);
+                    ((PropertyInfo)member).SetValue(o, targetValue, null);
                 }
             }
         }
@@ -930,7 +930,7 @@ namespace Kopernicus.ConfigParser
                 throw new IndexOutOfRangeException();
             }
 
-            return (T) States[name]();
+            return (T)States[name]();
         }
 
         // Custom Assembly query since AppDomain and Assembly loader are not quite what we want in 1.1
