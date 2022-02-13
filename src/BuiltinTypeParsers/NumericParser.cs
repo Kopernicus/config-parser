@@ -43,12 +43,12 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         /// The value that is being parsed
         /// </summary>
         public T Value { get; set; }
-        
+
         /// <summary>
         /// The method that is used to parse the string
         /// </summary>
         private readonly MethodInfo _parserMethod;
-        
+
         /// <summary>
         /// Parse the Value from a string
         /// </summary>
@@ -64,16 +64,16 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return Value == null ? null : Value.ToString();
         }
-        
+
         /// <summary>
         /// Create a new NumericParser
         /// </summary>
         public NumericParser()
         {
             // Get the parse method for this object
-            _parserMethod = typeof(T).GetMethod("Parse", new [] { typeof(String) });
+            _parserMethod = typeof(T).GetMethod("Parse", new[] { typeof(String) });
         }
-        
+
         /// <summary>
         /// Create a new NumericParser from an already existing value
         /// </summary>
@@ -89,7 +89,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return parser.Value;
         }
-        
+
         /// <summary>
         /// Convert Value to Parser
         /// </summary>

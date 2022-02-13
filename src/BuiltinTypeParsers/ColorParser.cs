@@ -139,10 +139,10 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
             else if (str.StartsWith("XKCD."))
             {
                 PropertyInfo color = typeof(XKCDColors).GetProperty(str.Replace("XKCD.", ""),
-                    BindingFlags.Static | BindingFlags.Public);
+                    BindingFlags.Public | BindingFlags.Static);
                 if (color != null)
                 {
-                    Value = (Color) color.GetValue(null, null);
+                    Value = (Color)color.GetValue(null, null);
                 }
             }
             else if (str.StartsWith("#"))

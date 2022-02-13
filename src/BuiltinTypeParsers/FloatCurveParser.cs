@@ -97,12 +97,12 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
             {
                 return null;
             }
-            
+
             ConfigNode node = new ConfigNode();
             Value.Save(node);
             return node;
         }
-        
+
         /// <summary>
         /// Create a new FloatCurveParser
         /// </summary>
@@ -110,7 +110,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             Value = new FloatCurve();
         }
-        
+
         /// <summary>
         /// Create a new FloatCurveParser from an already existing value
         /// </summary>
@@ -134,7 +134,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return parser.Value.Curve;
         }
-        
+
         /// <summary>
         /// Convert Value to Parser
         /// </summary>
@@ -142,7 +142,7 @@ namespace Kopernicus.ConfigParser.BuiltinTypeParsers
         {
             return new FloatCurveParser(value);
         }
-        
+
         /// <summary>
         /// Convert Value to Parser
         /// </summary>
